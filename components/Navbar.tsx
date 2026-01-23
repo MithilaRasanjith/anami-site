@@ -133,12 +133,6 @@ export default function Navbar() {
         {/* DESKTOP CTA */}
         <div className="hidden items-center gap-3 md:flex">
           <Link
-            href="/contact"
-            className="rounded-2xl border border-border-light bg-bg-white px-4 py-2 text-sm font-semibold text-text-primary hover:bg-bg-soft"
-          >
-            WhatsApp / Call
-          </Link>
-          <Link
             href="/register"
             className="rounded-2xl bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-brand-hover"
           >
