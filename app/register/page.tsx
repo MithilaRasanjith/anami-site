@@ -36,8 +36,8 @@ function buildWhatsAppLink(message: string, phoneE164?: string) {
 
 export default function RegisterPage() {
   // Optional: put your WhatsApp business number in E.164 format (no +)
-  // Example (Sri Lanka): "94701234567"
-  const WHATSAPP_NUMBER = "818039445160"; // <- add later if you want
+  // Example (Sri Lanka): "818039445160"
+  const WHATSAPP_NUMBER = "94718657036";
 
   const searchParams = useSearchParams();
 
@@ -47,11 +47,14 @@ export default function RegisterPage() {
   const [contactPref, setContactPref] = useState<"WhatsApp" | "Call">("WhatsApp");
   const [message, setMessage] = useState("");
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<null | { type: "success" | "error"; text: string }>(null);
+
   useEffect(() => {
     const courseParam = (searchParams.get("course") || "").trim();
     const mapped = courseParamToValue[courseParam];
     if (mapped) setCourse(mapped);
-  }, [searchParams]);
+  }, [searchParams.get("course")]);
 
   const phoneDigits = useMemo(() => normalizePhone(phone), [phone]);
 
@@ -75,7 +78,12 @@ export default function RegisterPage() {
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!canSubmit) return;
+    if (!canSubmit || isSubmitting) return;
+
+    setIsSubmitting(true);
+    setStatus(null);
+
+    let savedOk = false;
 
     try {
       await addDoc(collection(db, "registrations"), {
@@ -87,15 +95,26 @@ export default function RegisterPage() {
         source: "website",
         createdAt: serverTimestamp(),
       });
+      savedOk = true;
+      setStatus({ type: "success", text: "Saved ✓ Opening WhatsApp…" });
     } catch (err) {
       console.error("Failed to save registration:", err);
-      // Still continue to WhatsApp even if saving fails
+      setStatus({
+        type: "error",
+        text: "Couldn’t save to database, but WhatsApp will open. Please send the message.",
+      });
     }
 
-    const link = buildWhatsAppLink(waMessage, WHATSAPP_NUMBER || undefined);
-    window.open(link, "_blank", "noopener,noreferrer");
-  }
+    setTimeout(() => {
+      const link = buildWhatsAppLink(waMessage, WHATSAPP_NUMBER || undefined);
+      window.open(link, "_blank", "noopener,noreferrer");
+      setIsSubmitting(false);
 
+      if (savedOk) {
+        setTimeout(() => setStatus(null), 2500);
+      }
+    }, 600);
+  }
 
   return (
     <div className="space-y-14">
@@ -136,6 +155,16 @@ export default function RegisterPage() {
           <p className="mt-1 text-sm text-text-muted">
             We’ll use these details to contact you and confirm the schedule and fees.
           </p>
+
+          {/* STATUS BANNER (NEW) */}
+          {status && (
+            <div className="mt-4 rounded-2xl border border-border-light bg-bg-soft px-4 py-3 text-sm text-text-primary">
+              <span className="font-semibold">
+                {status.type === "success" ? "Success: " : "Notice: "}
+              </span>
+              {status.text}
+            </div>
+          )}
 
           <form onSubmit={onSubmit} className="mt-6 space-y-5">
             <div className="grid gap-4 sm:grid-cols-2">
@@ -185,30 +214,29 @@ export default function RegisterPage() {
               <label className="text-sm font-semibold text-text-primary">Preferred contact</label>
               <div className="mt-2 flex gap-2">
                 <button
-                    type="button"
-                    onClick={() => setContactPref("WhatsApp")}
-                    className={`rounded-2xl px-4 py-2 text-sm font-semibold transition ${
+                  type="button"
+                  onClick={() => setContactPref("WhatsApp")}
+                  className={`rounded-2xl px-4 py-2 text-sm font-semibold transition ${
                     contactPref === "WhatsApp"
-                        ? "bg-text-primary text-white"
-                        : "border border-border-light bg-bg-white text-text-primary hover:bg-bg-soft"
-                    }`}
+                      ? "bg-text-primary text-white"
+                      : "border border-border-light bg-bg-white text-text-primary hover:bg-bg-soft"
+                  }`}
                 >
-                    WhatsApp
+                  WhatsApp
                 </button>
 
                 <button
-                    type="button"
-                    onClick={() => setContactPref("Call")}
-                    className={`rounded-2xl px-4 py-2 text-sm font-semibold transition ${
+                  type="button"
+                  onClick={() => setContactPref("Call")}
+                  className={`rounded-2xl px-4 py-2 text-sm font-semibold transition ${
                     contactPref === "Call"
-                        ? "bg-text-primary text-white"
-                        : "border border-border-light bg-bg-white text-text-primary hover:bg-bg-soft"
-                    }`}
+                      ? "bg-text-primary text-white"
+                      : "border border-border-light bg-bg-white text-text-primary hover:bg-bg-soft"
+                  }`}
                 >
-                    Call
+                  Call
                 </button>
               </div>
-
             </div>
 
             <div>
@@ -229,14 +257,14 @@ export default function RegisterPage() {
 
               <button
                 type="submit"
-                disabled={!canSubmit}
+                disabled={!canSubmit || isSubmitting}
                 className={`rounded-2xl px-6 py-3 text-sm font-semibold transition ${
-                  canSubmit
-                    ? "bg-brand text-white hover:bg-brand-hover"
-                    : "cursor-not-allowed bg-border-light text-text-muted"
+                  !canSubmit || isSubmitting
+                    ? "cursor-not-allowed bg-border-light text-text-muted"
+                    : "bg-brand text-white hover:bg-brand-hover"
                 }`}
               >
-                Send via WhatsApp
+                {isSubmitting ? "Saving…" : "Send via WhatsApp"}
               </button>
             </div>
           </form>
@@ -289,4 +317,3 @@ export default function RegisterPage() {
     </div>
   );
 }
-    
