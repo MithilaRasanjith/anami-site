@@ -4,6 +4,9 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { db } from "@/lib/firebase";
+
 type CourseOption = {
   label: string;
   value: string;
@@ -70,13 +73,29 @@ export default function RegisterPage() {
 
   const canSubmit = name.trim().length >= 2 && phoneDigits.length >= 9;
 
-  function onSubmit(e: React.FormEvent) {
+  async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!canSubmit) return;
+
+    try {
+      await addDoc(collection(db, "registrations"), {
+        name: name.trim(),
+        phone: phoneDigits,
+        course,
+        contactPref,
+        message: message.trim() || "",
+        source: "website",
+        createdAt: serverTimestamp(),
+      });
+    } catch (err) {
+      console.error("Failed to save registration:", err);
+      // Still continue to WhatsApp even if saving fails
+    }
 
     const link = buildWhatsAppLink(waMessage, WHATSAPP_NUMBER || undefined);
     window.open(link, "_blank", "noopener,noreferrer");
   }
+
 
   return (
     <div className="space-y-14">
