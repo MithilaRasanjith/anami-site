@@ -143,7 +143,7 @@ export default function VisaGuidanceClient() {
 
       {/* IMPORTANT NOTE */}
       <Reveal>
-        <section className="rounded-3xl border border-border-light bg-bg-white p-8 shadow-md md:p-10">
+        <section className="rounded-3xl border border-border-light bg-bg-soft p-8 shadow-md md:p-10">
           <h2 className="text-xl font-semibold text-text-primary">Important note</h2>
 
           <p className="mt-4 text-sm leading-relaxed text-text-muted">

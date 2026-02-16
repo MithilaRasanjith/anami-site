@@ -196,7 +196,7 @@ export default function TeachersClient() {
 
       {/* FINAL CTA */}
       <Reveal>
-        <section className="rounded-3xl border border-border-light bg-bg-white p-8 shadow-md md:p-10">
+        <section className="rounded-3xl border border-border-light bg-bg-soft p-8 shadow-md md:p-10">
           <div className="grid items-center gap-6 md:grid-cols-2">
             <div>
               <h2 className="text-2xl font-semibold text-text-primary">Start your Japanese journey</h2>
