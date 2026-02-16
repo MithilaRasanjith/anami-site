@@ -43,7 +43,7 @@ export default function Reveal({
   children,
   className,
   threshold = 0.15,
-  delayMs = 0,
+  delayMs = 200,
 }: {
   children: React.ReactNode;
   className?: string;
