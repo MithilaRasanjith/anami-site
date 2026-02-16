@@ -30,7 +30,7 @@ export default function AboutPage() {
     name: SITE_NAME,
     description:
       "Japanese language school focused on JLPT/NAT N5 with structured lessons, speaking practice, and supportive guidance.",
-    url: "https://YOUR_DOMAIN_HERE.com/about", // TODO: replace with your real domain
+    url: "https://www.anamijls.com/about",
   };
 
   return (

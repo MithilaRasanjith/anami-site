@@ -28,7 +28,7 @@ export default function ContactPage() {
     "@context": "https://schema.org",
     "@type": "EducationalOrganization",
     name: SITE_NAME,
-    url: "https://YOUR_DOMAIN_HERE.com/contact", // TODO: replace
+    url: "https://www.anamijls.com/contact", 
     contactPoint: [
       {
         "@type": "ContactPoint",

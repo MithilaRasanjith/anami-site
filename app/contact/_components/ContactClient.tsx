@@ -4,6 +4,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { MessageCircle, Phone, Mail } from "lucide-react";
+import Reveal from "@/components/Reveal";
 
 type ContactOption = {
   id: string;
@@ -78,65 +79,6 @@ const faq = [
     a: "Visa guidance is a benefit included for ANAMI students only. Guidance only — ANAMI is not an agency.",
   },
 ];
-
-function cx(...classes: Array<string | false | null | undefined>) {
-  return classes.filter(Boolean).join(" ");
-}
-
-function useReveal() {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const [shown, setShown] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const prefersReduced =
-      window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
-
-    if (prefersReduced) {
-      setShown(true);
-      return;
-    }
-
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShown(true);
-          obs.disconnect();
-        }
-      },
-      { threshold: 0.15 }
-    );
-
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-
-  return { ref, shown };
-}
-
-function Reveal({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  const { ref, shown } = useReveal();
-  return (
-    <div
-      ref={ref}
-      className={cx(
-        "transition-all duration-700 ease-out will-change-transform",
-        shown ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3",
-        className
-      )}
-    >
-      {children}
-    </div>
-  );
-}
 
 function IconFor({ kind }: { kind: ContactOption["kind"] }) {
   if (kind === "whatsapp") return <MessageCircle size={16} className="text-text-muted" />;

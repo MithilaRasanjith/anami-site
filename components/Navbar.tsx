@@ -8,13 +8,15 @@ import { ChevronDown, Menu, X } from "lucide-react";
 const courseLinks = [
   { label: "Special Group Class – N5", href: "/courses/special-group-n5" },
   { label: "Online Class – N5", href: "/courses/online-n5" },
+  { label: "Group Class – G.C.E. O/L Examination", href: "/courses/olevel" },
+  { label: "Group Class – G.C.E. A/L Examination", href: "/courses/alevel" },
   { label: "Visa Guidance", href: "/visa-guidance" },
 ];
 
 const navLinks = [
   { label: "About", href: "/about" },
   { label: "Teachers", href: "/teachers" },
-  { label: "Success Stories", href: "/success-stories" },
+  { label: "News", href: "/news" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -91,9 +93,13 @@ export default function Navbar() {
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
         {/* BRAND */}
         <Link href="/" className="group flex items-center gap-3">
-          <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-border-light bg-bg-white text-sm font-semibold text-text-primary transition group-hover:-translate-y-0.5 group-hover:shadow-sm">
-            AN
-          </span>
+          <div className="flex items-center justify-center rounded-xl border border-border-light bg-bg-white px-2 py-1 transition group-hover:-translate-y-0.5 group-hover:shadow-sm">
+            <img
+              src="/logo/anami-logo.png"
+              alt="ANAMI Japanese Language School"
+              className="h-6 w-auto"
+            />
+          </div>
           <div className="leading-tight">
             <div className="text-sm font-semibold text-text-primary">ANAMI</div>
             <div className="text-xs text-text-muted">Japanese Language School</div>

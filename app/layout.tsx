@@ -2,6 +2,13 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Inter, Noto_Sans_JP } from "next/font/google";
+import type { Metadata } from "next";
+
+const SITE_URL = "https://anamijls.com";
+const SITE_NAME = "ANAMI Japanese Language School";
+const DEFAULT_TITLE = "ANAMI Japanese Language School";
+const DEFAULT_DESC =
+  "Structured Japanese learning for beginners (JLPT / NAT N5) with speaking practice and supportive guidance. Special Group & Online (Zoom) classes.";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -15,9 +22,41 @@ const notoJP = Noto_Sans_JP({
   display: "swap",
 });
 
-export const metadata = {
-  title: "ANAMI Japanese Language School",
-  description: "ANAMI Japanese Language School official website",
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: DEFAULT_TITLE,
+    template: `%s | ${SITE_NAME}`,
+  },
+  description: DEFAULT_DESC,
+  applicationName: SITE_NAME,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESC,
+    images: [
+      {
+        url: "/og.png", // add later in /public (optional)
+        width: 1200,
+        height: 630,
+        alt: SITE_NAME,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESC,
+    images: ["/og.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
