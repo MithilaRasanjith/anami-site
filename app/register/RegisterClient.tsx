@@ -15,12 +15,16 @@ type CourseOption = {
 const courseOptions: CourseOption[] = [
   { label: "Special Group Class – JLPT / NAT N5", value: "Special Group Class – N5" },
   { label: "Online Class – JLPT / NAT N5", value: "Online Class – N5" },
+  { label: "Group Class – G.C.E. Ordinary Level", value: "Group Class – O/L" },
+  { label: "Group Class – G.C.E. Advanced Level", value: "Group Class – A/L" },
   { label: "Not sure yet (help me choose)", value: "Not sure yet" },
 ];
 
 const courseParamToValue: Record<string, string> = {
   "special-group-n5": "Special Group Class – N5",
   "online-n5": "Online Class – N5",
+  "olevel": "Group Class – O/L",
+  "alevel": "Group Class – A/L",
   "not-sure": "Not sure yet",
 };
 

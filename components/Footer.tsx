@@ -88,11 +88,7 @@ export default function Footer({ year }: { year: number }) {
         <div className="mt-10 border-t border-border-light pt-6">
           <div className="flex flex-col gap-2 text-xs text-text-muted md:flex-row md:items-center md:justify-between">
             <div>
-              © {year} ANAMI Japanese Language School. All rights reserved.
-            </div>
-
-            <div>
-              Guidance only — ANAMI is not an agency.
+              Copyright © {year} ANAMI Japanese Language School. All rights reserved.
             </div>
           </div>
         </div>
