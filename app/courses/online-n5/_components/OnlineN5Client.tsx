@@ -133,7 +133,7 @@ export default function OnlineN5Client() {
               },
               {
                 title: "Practice & Feedback",
-                desc: "Regular speaking, listening, and revision activities.",
+                desc: "Regular speaking, listening, and revision activities with past paper discussions.",
               },
             ].map((item, i) => (
               <Reveal key={item.title} delayMs={i * 90}>

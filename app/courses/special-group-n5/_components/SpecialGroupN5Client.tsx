@@ -44,8 +44,8 @@ export default function SpecialGroupN5Client() {
 
               <dl className="mt-4 space-y-4 text-sm">
                 {[
-                  { k: "Teacher", v: "Ms. Sewwandi Ekanayaka" },
-                  { k: "Schedule", v: "Every Sunday • 09.00 – 17.00" },
+                  { k: "Teacher", v: "Ms. Sewwandi Rajapakshe" },
+                  { k: "Schedule", v: "Every Saturday & Sunday • 09.00 – 17.00" },
                   { k: "Monthly Fee", v: "LKR 5,000" },
                   { k: "Location", v: "Gampaha – Udugampola" },
                   { k: "Class Type", v: "Physical (Special Group)" },

@@ -18,13 +18,13 @@ const teachers = [
     cta: { label: "View Online Class", href: "/courses/online-n5?course=online-n5" },
   },
   {
-    name: "Ms. Sewwandi Ekanayaka",
+    name: "Ms. Sewwandi Rajapakshe",
     role: "Special Group Class — JLPT / NAT N5",
     tags: ["In-person", "Small group", "Weekly practice"],
     bio:
       "Focused group learning with consistent practice and guidance. Ideal if you prefer a classroom environment and weekly accountability.",
     highlights: [
-      "Every Sunday (09:00 – 17:00)",
+      "Every Saturday & Sunday (09:00 – 17:00)",
       "Gampaha (Udugampola)",
       "Limited to 20 students",
     ],

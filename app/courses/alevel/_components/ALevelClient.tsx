@@ -50,7 +50,7 @@ export default function ALevelClient() {
 
               <dl className="mt-4 space-y-4 text-sm">
                 {[
-                  { k: "Teacher", v: "Ms. Sewwandi Ekanayaka" },
+                  { k: "Teacher", v: "Ms. Sewwandi Rajapakshe" },
                   { k: "Schedule", v: "Every Sunday • 15.00 – 17.00" },
                   { k: "Monthly Fee", v: "LKR 2,000" },
                   { k: "Location", v: "Gampaha – Udugampola" },
