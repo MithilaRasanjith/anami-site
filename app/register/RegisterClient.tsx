@@ -42,7 +42,7 @@ function buildWhatsAppLink(message: string, phoneE164?: string) {
 export default function RegisterClient() {
   // Optional: put your WhatsApp business number in E.164 format (no +)
   // Example (Sri Lanka): "818039445160"
-  const WHATSAPP_NUMBER = "94718657036";
+  const WHATSAPP_NUMBER = "818039445160";
 
   const searchParams = useSearchParams();
 
