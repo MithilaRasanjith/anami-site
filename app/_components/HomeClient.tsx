@@ -243,8 +243,10 @@ export default function HomeClient() {
         </Reveal>
       </section>
 
+      
+
       {/* TESTIMONIALS */}
-      <section className="space-y-6">
+      {/*<section className="space-y-6">
         <Reveal>
           <div>
             <h2 className="text-2xl font-semibold text-text-primary">Student feedback</h2>
@@ -266,6 +268,8 @@ export default function HomeClient() {
           ))}
         </div>
       </section>
+
+      */}
 
       {/* TEACHERS */}
       <section className="space-y-6">

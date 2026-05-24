@@ -1,19 +1,14 @@
-import type { Metadata } from "next";
+// app/news/page.tsx
+import { Metadata } from "next";
+import NewsClient from "./_components/NewsClient";
+import { newsItems } from "@/lib/news-data";
 
 export const metadata: Metadata = {
-  title: "Success Stories",
+  title: "News | ANAMI Japanese Language School",
   description:
-    "Student progress and success stories from ANAMI Japanese Language School. Real results through structured learning and practice.",
-  alternates: { canonical: "/success-stories" },
+    "Latest updates, announcements, and events from ANAMI Japanese Language School.",
 };
 
-export default function AboutPage() {
-  return (
-    <div className="space-y-6">
-      <h1 className="text-3xl font-semibold text-text-primary">News ANAMI</h1>
-      <p className="text-text-muted">
-        Coming soon.
-      </p>
-    </div>
-  );
+export default function NewsPage() {
+  return <NewsClient items={newsItems} />;
 }
